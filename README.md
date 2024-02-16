@@ -1,32 +1,60 @@
-# Getting Started with Create React App
+# Kozocom React Sample
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Requirement
+[![NodeJS Version](https://img.shields.io/badge/node-18.x-brightgreen.svg)](https://github.com/nodejs/node/releases) ![NodeJS  Latest Release](https://img.shields.io/github/v/release/nodejs/node?label=Node%20Latest%20Release)
 
-## Setup
+## Getting Started
 
-Run following commands:  
-`yarn install`  
-`yarn run prepare`
+### Installing
+```bash
+yarn install
+```
 
-## Available Scripts
+### Run project
+```bash
+# For environment Dev
+yarn start:dev
+# Each environment Staging
+yarn start:staging
+# Each environment Prod
+yarn start:prod
+```
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
+### Demo
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Linter
 
-example:  
-`yarn run eslint "src/components/Demo/**/*.{ts,tsx}"`
+## lint
+```bash
+yarn lint
+yarn lint:fix
+```
 
-### Format code
+## Format
+```bash
+yarn format
+yarn format:fix
+```
 
-`yarn run prettier --write "src/**/*.{ts,tsx,css,scss,md,json}"`
+## Test
+```bash
+yarn test
+```
 
-### Make VisualCode extensions work: Eslint, Prettier, ...
+### Build
+```bash
+yarn build
+```
 
-Follow
-https://yarnpkg.com/getting-started/editor-sdks#vscode
+## Development
+### Alias import
+```tsx
+import Comp from '@/components/Comp'
+```
+
+
+## storybook
+```bash
+yarn storybook
+```
+Open [http://localhost:6006](http://localhost:6006) to view it in the browser.

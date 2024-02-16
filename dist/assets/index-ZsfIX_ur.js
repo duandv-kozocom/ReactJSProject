@@ -1,0 +1,1 @@
+import{j as r,O as s}from"./index-SMcEeSU_.js";import{UserListing as n}from"./Listing-BW3oB8jZ.js";import"./userApiService-tE94rsL4.js";function i(){return r.jsx("div",{className:"",children:r.jsx(s,{})})}export{i as User,n as UserListing};
