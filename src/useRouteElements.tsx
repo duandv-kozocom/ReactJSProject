@@ -6,9 +6,8 @@ import { Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import {
   Product,
-  ProductCreating,
+  ProductCreateAndUpdate,
   ProductDetail,
-  ProductEditing,
   ProductsListing,
 } from "./pages/Product/Loadable";
 import { Cart } from "@/pages/Cart";
@@ -46,15 +45,15 @@ export default function useRouteElements() {
         },
         {
           path: ROUTE_PATH.PRODUCTS.CREATE,
-          element: <ProductCreating />,
+          element: <ProductCreateAndUpdate />,
+        },
+        {
+          path: ROUTE_PATH.PRODUCTS.EDIT,
+          element: <ProductCreateAndUpdate />,
         },
         {
           path: ROUTE_PATH.PRODUCTS.DETAIL,
           element: <ProductDetail />,
-        },
-        {
-          path: ROUTE_PATH.PRODUCTS.EDIT,
-          element: <ProductEditing />,
         },
       ],
     },

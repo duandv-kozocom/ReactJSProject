@@ -34,7 +34,7 @@ export default function Sidebar({ isCollapse, onToggleNavbar }: ISidebarProps) {
             onClick={onToggleNavbar}
             className="text-left w-[250px] h-10 mb-[10px] font-[400] text-gray-600 bg-white rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:font-[600] focus:bg-[#E5F1FF]"
           >
-            <span className="text-[16px] p-3">Clothes and wear</span>
+            <span className="text-[16px] p-3">Manager products</span>
           </button>
         </NavLink>
 
