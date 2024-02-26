@@ -1,7 +1,5 @@
-// import Footer from '@/components/Footer'
 import Header from "@/components/layouts/Header";
 import Sidebar from "@/components/Sidebar";
-// import Statistics from '@/components/Statistics'
 import { useState } from "react";
 
 interface Props {
@@ -22,8 +20,6 @@ export function MainLayout({ children }: Props) {
         <Sidebar isCollapse={isCollapse} onToggleNavbar={handleToggleNavbar} />
         <div className="w-full my-5">{children}</div>
       </div>
-      {/* <Statistics /> */}
-      {/* <Footer /> */}
     </div>
   );
 }
