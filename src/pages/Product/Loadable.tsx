@@ -30,9 +30,9 @@ export const ProductsListing = lazyLoad(
   },
 )
 
-export const ProductCreating = lazyLoad(
-  () => import('./Creating'),
-  module => module.ProductCreating,
+export const ProductCreateAndUpdate = lazyLoad(
+  () => import('./CreateAndUpdate'),
+  module => module.ProductCreateAndUpdate,
   {
     fallback: (
       <LoadingWrapper>
@@ -45,18 +45,6 @@ export const ProductCreating = lazyLoad(
 export const ProductDetail = lazyLoad(
   () => import('./Detail'),
   module => module.ProductDetail,
-  {
-    fallback: (
-      <LoadingWrapper>
-        <LoadingIndicator />
-      </LoadingWrapper>
-    ),
-  },
-)
-
-export const ProductEditing = lazyLoad(
-  () => import('./Editing'),
-  module => module.ProductEditing,
   {
     fallback: (
       <LoadingWrapper>
