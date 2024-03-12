@@ -1,11 +1,25 @@
 import { ROUTE_PATH } from "@/constants/routes";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 interface Props {
   children?: React.ReactNode;
+  productsInCart: number;
+  setSearchTerm: (value: any) => void;
 }
 
-export default function Header({ children }: Props) {
+export default function Header({
+  children,
+  productsInCart,
+  setSearchTerm,
+}: Props) {
+  const [nameProduct, setNameProduct] = useState<any>();
+  const searchProduct = (nameProduct: any) => {
+    setSearchTerm(nameProduct);
+  };
+  const handleSearchChange = (event: any) => {
+    setNameProduct(event.target.value);
+  };
   return (
     <>
       <div className="w-[1180px] mx-auto flex items-center justify-between">
@@ -18,7 +32,12 @@ export default function Header({ children }: Props) {
           </div>
         </NavLink>
         <div className=" ml-[46px] flex my-5 w-[665px] h-10 items-center border-[#127FFF] border-[1px] rounded-[8px]">
-          <input type="text" className="w-[420px] h-full rounded-l-lg px-2" />
+          <input
+            type="text"
+            name="searchProduct"
+            onChange={handleSearchChange}
+            className="w-[420px] h-full rounded-l-lg px-2"
+          />
           <select
             name=""
             id=""
@@ -28,12 +47,18 @@ export default function Header({ children }: Props) {
               All Category
             </option>
           </select>
-          <button
-            type="button"
-            className="bg-[#127FFF] w-[100px] h-full rounded-r-lg"
+          <NavLink
+            to={ROUTE_PATH.PRODUCTS.LIST}
+            className="bg-[#127FFF] w-[100px] h-full rounded-r-lg flex items-center pl-4"
           >
-            <p className="text-white text-lg">Search</p>
-          </button>
+            <button
+              type="button"
+              onClick={() => searchProduct(nameProduct)}
+              className=""
+            >
+              <p className="text-white text-lg">Search</p>
+            </button>
+          </NavLink>
         </div>
         <div className="ml-[90px] flex gap-[15px]">
           <div className="inline-block">
@@ -49,9 +74,16 @@ export default function Header({ children }: Props) {
             <p className="text-xs text-gray-500 mt-1 inline-block">Order</p>
           </div>
           <NavLink to={ROUTE_PATH.CART.INDEX} className="">
-            <div className="inline-block">
+            <div className="inline-block relative">
               <img src="images/cart-icon.svg" alt="" className="mx-auto" />
               <p className="text-xs text-gray-500 mt-1 inline-block">My cart</p>
+              {productsInCart > 0 ? (
+                <p className="absolute -top-[14px] left-5 rounded-full w-5 h-5 text-center bg-[#FA3434] ">
+                  {productsInCart}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
           </NavLink>
         </div>

@@ -15,7 +15,7 @@ export default function Sidebar({ isCollapse, onToggleNavbar }: ISidebarProps) {
         className="text-[#1C1C1C] my-5 ml-[14px] mr-[11px]"
         role="group"
       >
-        <NavLink to={ROUTE_PATH.PRODUCTS.LIST} className="">
+        <NavLink to={ROUTE_PATH.PRODUCTS.LIST} >
           <button
             type="button"
             onClick={onToggleNavbar}

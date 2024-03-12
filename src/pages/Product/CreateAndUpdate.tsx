@@ -1,7 +1,7 @@
 import { InputControl } from "@/components/common/InputControl";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { DATA, TYPE } from "@/utils/data";
+import { DATA, TYPES } from "@/utils/data";
 import { toast } from "react-toastify";
 import { Product, Type } from "./types/Product";
 import { useNavigate, useParams } from "react-router-dom";
@@ -39,7 +39,6 @@ export function ProductCreateAndUpdate() {
   const navigate = useNavigate();
 
   const fetchDataProduct = () => {
-    console.log(products);
     const dataProduct: any = DATA.filter((item: Product) => item.id === id)[0];
     setProducts(dataProduct);
     setUrlImageProduct(dataProduct?.image);
@@ -85,12 +84,17 @@ export function ProductCreateAndUpdate() {
       ...data,
       id: String(DATA.length + 1),
     };
-    console.log(payload);
     if (id) {
       toast.success("Cập nhật sản phẩm thành công!");
       setTimeout(() => {
         return navigate(ROUTE_PATH.PRODUCTS.LIST);
       }, 1000);
+      for (let i = 0; i < DATA.length; i++) {
+        if (DATA[i].id === id) {
+          DATA[i] = payload;
+          break;
+        }
+      }
     } else {
       await DATA.push(payload);
       toast.success("Thêm sản phẩm thành công!");
@@ -104,7 +108,6 @@ export function ProductCreateAndUpdate() {
   };
   const handleChangeDescription = (e: any) => {
     setValue("description", e.target.value);
-    console.log("222");
   };
   const handleChangeImage = async (e: any, type: ImageType) => {
     if (e.target.files.length < 1) {
@@ -193,8 +196,12 @@ export function ProductCreateAndUpdate() {
               onChange={(e) => handleChangeType(e)}
               className="border border-black mb-4 mt-1"
             >
-              {TYPE.map((item: Type) => (
-                <option key={item.id} value={item.id}>
+              {TYPES.map((item: Type) => (
+                <option
+                  key={item.id}
+                  value={item.id}
+                  selected={item.id === getValues("type")}
+                >
                   {item.nameType}
                 </option>
               ))}
