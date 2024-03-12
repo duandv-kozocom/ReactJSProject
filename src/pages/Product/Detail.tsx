@@ -1,6 +1,25 @@
+<<<<<<< Updated upstream
+=======
+import { CATEGORY, DATA, TYPES } from "@/utils/data";
+import { useEffect, useState } from "react";
+>>>>>>> Stashed changes
 import { Helmet } from "react-helmet-async";
 
 export function ProductDetail() {
+<<<<<<< Updated upstream
+=======
+  const { id } = useParams<string>();
+  const [detailProduct, setDetailProduct] = useState<Product>();
+  const [categoryProduct, setCategoryProduct] = useState<Category>();
+  const fetchDataProduct = () => {
+    const dataProduct = DATA.filter((item: Product) => item.id === id)[0];
+    setDetailProduct(dataProduct);
+    setCategoryProduct(CATEGORY);
+  };
+  useEffect(() => {
+    fetchDataProduct();
+  }, []);
+>>>>>>> Stashed changes
   return (
     <>
       <Helmet>
@@ -46,6 +65,7 @@ export function ProductDetail() {
               <p className="text-[#FA3434] font-[600]">$98.00</p>
               <p className="text-[#606060]">50-100 pcs</p>
             </div>
+<<<<<<< Updated upstream
             <div className="border border-[#BDC1C8] w-0 h-[48px] my-3"></div>
             <div className="p-3 mr-5">
               <p className="text-[#FA3434] font-[600]">$98.00</p>
@@ -82,6 +102,67 @@ export function ProductDetail() {
             <div className="flex mb-4">
               <p className="w-[30%]">Warranty: </p>
               <p>2 years full warranty</p>
+=======
+            <div className="text-[18px] w-full h-[72px] bg-[#FFF0DF] flex">
+              <div className="p-3 mr-5">
+                <p className="text-[#FA3434] font-[600]">
+                  ${categoryProduct?.priceFirst}
+                </p>
+                <p className="text-[#606060]">
+                  {categoryProduct?.versionFirst}
+                </p>
+              </div>
+              <div className="border border-[#BDC1C8] w-0 h-[48px] my-3"></div>
+              <div className="p-3 mr-5">
+                <p className="text-[#FA3434] font-[600]">
+                  ${categoryProduct?.priceSecond}
+                </p>
+                <p className="text-[#606060]">
+                  {categoryProduct?.versionSecond}
+                </p>
+              </div>
+              <div className="border border-[#BDC1C8] w-0 h-[48px] my-3"></div>
+              <div className="p-3 mr-5">
+                <p className="text-[#FA3434] font-[600]">
+                  ${categoryProduct?.priceThird}
+                </p>
+                <p className="text-[#606060]">
+                  {categoryProduct?.versionThird}
+                </p>
+              </div>
+            </div>
+            <div className="text-[18px] mt-5">
+              <div className="flex mb-4">
+                <p className="w-[40%]">Price: </p>
+                <p>{detailProduct.price}</p>
+              </div>
+              <hr className="mb-4" />
+              <div className="flex mb-4">
+                <p className="w-[40%]">Type: </p>
+                <p>{(TYPES.find((type) => type.id === detailProduct.type))?.nameType}</p>
+              </div>
+              <div className="flex mb-4">
+                <p className="w-[40%]">Material: </p>
+                <p>{detailProduct.material}</p>
+              </div>
+              <div className="flex mb-4">
+                <p className="w-[40%]">Design: </p>
+                <p>{detailProduct.design}</p>
+              </div>
+              <hr className="mb-4" />
+              <div className="flex mb-4">
+                <p className="w-[40%]">Customization:</p>
+                <p>{detailProduct.customization}</p>
+              </div>
+              <div className="flex mb-4">
+                <p className="w-[40%]">Protection: </p>
+                <div>{detailProduct.protection}</div>
+              </div>
+              <div className="flex mb-4">
+                <p className="w-[40%]">Warranty: </p>
+                <p>{detailProduct.warranty}</p>
+              </div>
+>>>>>>> Stashed changes
             </div>
           </div>
         </div>
