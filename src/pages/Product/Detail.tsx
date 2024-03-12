@@ -1,4 +1,4 @@
-import { CATEGORY, DATA } from "@/utils/data";
+import { CATEGORY, DATA, TYPES } from "@/utils/data";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
@@ -11,7 +11,7 @@ export function ProductDetail() {
   const fetchDataProduct = () => {
     const dataProduct = DATA.filter((item: Product) => item.id === id)[0];
     setDetailProduct(dataProduct);
-    setCategoryProduct(CATEGORY)
+    setCategoryProduct(CATEGORY);
   };
   useEffect(() => {
     fetchDataProduct();
@@ -57,21 +57,27 @@ export function ProductDetail() {
                 <p className="text-[#FA3434] font-[600]">
                   ${categoryProduct?.priceFirst}
                 </p>
-                <p className="text-[#606060]">{categoryProduct?.versionFirst}</p>
+                <p className="text-[#606060]">
+                  {categoryProduct?.versionFirst}
+                </p>
               </div>
               <div className="border border-[#BDC1C8] w-0 h-[48px] my-3"></div>
               <div className="p-3 mr-5">
                 <p className="text-[#FA3434] font-[600]">
                   ${categoryProduct?.priceSecond}
                 </p>
-                <p className="text-[#606060]">{categoryProduct?.versionSecond}</p>
+                <p className="text-[#606060]">
+                  {categoryProduct?.versionSecond}
+                </p>
               </div>
               <div className="border border-[#BDC1C8] w-0 h-[48px] my-3"></div>
               <div className="p-3 mr-5">
                 <p className="text-[#FA3434] font-[600]">
                   ${categoryProduct?.priceThird}
                 </p>
-                <p className="text-[#606060]">{categoryProduct?.versionThird}</p>
+                <p className="text-[#606060]">
+                  {categoryProduct?.versionThird}
+                </p>
               </div>
             </div>
             <div className="text-[18px] mt-5">
@@ -82,7 +88,7 @@ export function ProductDetail() {
               <hr className="mb-4" />
               <div className="flex mb-4">
                 <p className="w-[40%]">Type: </p>
-                <p>{detailProduct.type}</p>
+                <p>{(TYPES.find((type) => type.id === detailProduct.type))?.nameType}</p>
               </div>
               <div className="flex mb-4">
                 <p className="w-[40%]">Material: </p>

@@ -7,15 +7,47 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Product } from "./types/Product";
 import { toast } from "react-toastify";
 
-export function ProductsListing() {
+interface Props {
+  setProductsInCart: (value: any) => void;
+  searchTerm: any;
+}
+
+export function ProductsListing({ setProductsInCart, searchTerm }: Props) {
   const [openPopupDelete, setOpenPopupDelete] = useState<boolean>(false);
   const [listProducts, setListProducts] = useState<Product[]>([]);
   const [idDeleteProduct, setIdDeleteProduct] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const storedCartItems = sessionStorage.getItem("cartItems");
+  const initialCartItems = storedCartItems ? JSON.parse(storedCartItems) : [];
+
+  const [cartItems, setCartItems] = useState(initialCartItems);
+  const addToCart = async (product: any) => {
+    const updatedCartItems = [...cartItems];
+    const existingItemIndex = updatedCartItems.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (existingItemIndex !== -1) {
+      updatedCartItems[existingItemIndex].quantity++;
+    } else {
+      updatedCartItems.push({ ...product, quantity: 1 });
+    }
+
+    await setCartItems(updatedCartItems);
+    await sessionStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    await setProductsInCart(updatedCartItems.length);
+  };
   const navigate = useNavigate();
 
   const fetchDataProduct = () => {
     setListProducts(DATA);
+    if (searchTerm !== undefined) {
+      const filteredProducts = DATA.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setListProducts(filteredProducts);
+    }
   };
   const handleDeleteProduct = async (idProduct: string) => {
     try {
@@ -36,7 +68,7 @@ export function ProductsListing() {
 
   useEffect(() => {
     fetchDataProduct();
-  }, []);
+  }, [cartItems]);
 
   const handleClickDetailPatient = (id: string) => {
     const route = ROUTE_PATH.PRODUCTS.DETAIL.replace(":id", id);
@@ -55,7 +87,11 @@ export function ProductsListing() {
       </Helmet>
       <div className={`${isLoading && "opacity-[0.2]"}`}>
         <div className="flex justify-between mr-6">
-          <h1 className="text-[30px] mb-5">List product</h1>
+          {searchTerm !== undefined ? (
+            <h1 className="text-[30px] mb-5">{`Kết quả tìm kiếm: "${searchTerm}"`}</h1>
+          ) : (
+            <h1 className="text-[30px] mb-5">List product</h1>
+          )}
           <NavLink to={ROUTE_PATH.PRODUCTS.CREATE} className="">
             <button
               type="button"
@@ -70,11 +106,7 @@ export function ProductsListing() {
             key={item.id}
             className="flex rounded border border-gray-300 relative w-[880px] mb-5"
           >
-            <img
-              src={item.image}
-              className="w-[210px] h-[210px] m-2"
-              alt=""
-            />{" "}
+            <img src={item.image} className="w-[210px] h-[210px] m-2" alt="" />{" "}
             <button
               onClick={() => handleClickEditProduct(item.id)}
               className="absolute right-[130px] top-4 flex items-center border-[2px] border-gray-300 px-3 py-1 rounded text-[16px] hover:text-[#0D6EFD] hover:border-[#0D6EFD]"
@@ -143,7 +175,10 @@ export function ProductsListing() {
                 >
                   View detail
                 </p>
-                <button className="ml-3 rounded w-40 h-10 bg-[#FA3434] flex items-center justify-center text-white text-[16px] absolute right-4 bottom-4">
+                <button
+                  onClick={() => addToCart(item)}
+                  className="ml-3 rounded w-40 h-10 bg-[#FA3434] flex items-center justify-center text-white text-[16px] absolute right-4 bottom-4 hover:text-[#FA3434] hover:bg-[#ffffff] border hover:border-[#FA3434]"
+                >
                   Add to cart
                   <img
                     src="images/cart-icon.svg"

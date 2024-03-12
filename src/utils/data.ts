@@ -8,7 +8,7 @@ export const DATA = [
     discount: 980,
     evaluate: 7.5,
     order: 156,
-    type: "Iphone promax",
+    type: "2",
     material: "Titanium",
     design: "red color",
     customization: "3 camera",
@@ -26,7 +26,7 @@ export const DATA = [
     discount: 980,
     evaluate: 7.5,
     order: 156,
-    type: "Iphone promax",
+    type: "2",
     material: "Titanium",
     design: "red color",
     customization: "3 camera",
@@ -44,7 +44,7 @@ export const DATA = [
     discount: 980,
     evaluate: 7.5,
     order: 156,
-    type: "Iphone promax",
+    type: "3",
     material: "Titanium",
     design: "red color",
     customization: "3 camera",
@@ -62,7 +62,7 @@ export const CATEGORY = {
   versionSecond: "Pro",
   versionThird: "Pro max",
 };
-export const TYPE = [
+export const TYPES = [
   { id: "1", nameType: "Plus" },
   { id: "2", nameType: "Pro" },
   { id: "3", nameType: "Pro max" },
